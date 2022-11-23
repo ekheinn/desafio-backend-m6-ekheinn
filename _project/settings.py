@@ -134,6 +134,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 5,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
 SPECTACULAR_SETTINGS = {
     "TITLE": "Desafio Back-End",
     "DESCRIPTION": "A API consiste em parsear arquivo de texto(CNAB) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.",
