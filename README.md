@@ -48,6 +48,12 @@ pip install -r requirements.txt
 ./manage.py migrate
 ```
 
+### Rode a aplicação
+
+```
+./manage.py runserver
+```
+
 ---
 
 <br/>
@@ -60,7 +66,7 @@ Arquivo para fazer testes: **[Arquivo CNAB](https://github.com/Kenzie-Academy-Br
 
 ## Documentação
 
-> http://127.0.0.1:8000/api/docs/
+> http://127.0.0.1:8000/docs/
 
 ## Rotas
 
