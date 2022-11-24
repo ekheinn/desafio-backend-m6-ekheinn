@@ -142,7 +142,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Desafio Back-End",
-    "DESCRIPTION": "A API consiste em parsear arquivo de texto(CNAB) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.",
+    "DESCRIPTION": "A API consiste em parsear arquivo de texto(CNAB) e salvar suas informações(transações financeiras) em um banco de dados.",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
