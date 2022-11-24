@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: Desafio Back-End
+  version: 1.0.0
+  description: A API consiste em parsear arquivo de texto(CNAB) e salvar suas informações(transações
+    financeiras) em uma base de dados a critério do candidato.
+paths:
+  /api/balance/:
+    get:
+      operationId: api_balance_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCnabList'
+          description: ''
+  /api/cnab/:
+    get:
+      operationId: api_cnab_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCnabList'
+          description: ''
+    post:
+      operationId: api_cnab_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cnab'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cnab'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cnab'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cnab'
+          description: ''
+components:
+  schemas:
+    Cnab:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        transaction_type:
+          allOf:
+          - $ref: '#/components/schemas/TransactionTypeEnum'
+          readOnly: true
+        date:
+          type: string
+          readOnly: true
+        value:
+          type: string
+          readOnly: true
+        CPF:
+          type: string
+          readOnly: true
+        card:
+          type: string
+          readOnly: true
+        hour:
+          type: string
+          readOnly: true
+        owner:
+          type: string
+          readOnly: true
+        store_name:
+          type: string
+          readOnly: true
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+      required:
+      - CPF
+      - card
+      - date
+      - file
+      - hour
+      - id
+      - owner
+      - store_name
+      - transaction_type
+      - value
+    PaginatedCnabList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cnab'
+    TransactionTypeEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      type: integer
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
